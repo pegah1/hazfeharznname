@@ -31,13 +31,24 @@ import os.path
 import os
 import sys
 from heapq import*
+from collections import OrderedDict
 black_list=[]
 def create_black_list():
     fr=None
     fr=open("balcklist_word.txt",'rb')
+    s=[]
     for line in fr:
-        black_list.append(line.strip())
-    #print black_list
+        line= re.findall(r"[\w']+",line)
+        for i in range(0,len(line)):
+            line[i]=line[i].lower()
+            line[i] = porter.stem(line[i])
+            if(line[i] in list_stop):
+                continue
+            black_list.append(line[i])
+            
+    s=list(OrderedDict.fromkeys(black_list))
+    print s
+    return s
 def unpack_list_of_unmerge_file():
     pm=[]
     with open('size-unmerge-inverted-index.dat','rb') as g:
@@ -455,7 +466,8 @@ def rankBM25_DocumentAtATime_WithHeap(q,k):
         term.append((doc_id,q[i],len(a),a))
     term.sort()
     doc_id=0
-    while term[0][0]<10000*10000:
+    print term
+    while (len(term)!=0 and term[0][0]<10000*10000):
         doc_id=term[0][0]
         b=[]
         while term[0][0]==doc_id:
@@ -573,7 +585,10 @@ def user(m):
 def input_query():
     _result=[]
     x=int(raw_input("pleas enter how many MAIL id you want to search?"+'\n'))
-    _result=score_phrase(black_list,x)               
+    qq=create_black_list()
+    print"--------------------------------"
+    print len(qq)
+    _result=score_phrase(qq,x)               
     user(_result)
     
 #main_dictionary()
