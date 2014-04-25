@@ -47,7 +47,7 @@ def create_black_list():
             black_list.append(line[i])
             
     s=list(OrderedDict.fromkeys(black_list))
-    print s
+    #print s
     return s
 def unpack_list_of_unmerge_file():
     pm=[]
@@ -466,7 +466,7 @@ def rankBM25_DocumentAtATime_WithHeap(q,k):
         term.append((doc_id,q[i],len(a),a))
     term.sort()
     doc_id=0
-    print term
+   # print term
     while (len(term)!=0 and term[0][0]<10000*10000):
         doc_id=term[0][0]
         b=[]
@@ -558,24 +558,27 @@ def user(m):
         if(x>len(score)): print "not fuond any MAIL"
         _string=str()
         while(x!=-1):
-            if(x>len(score)): print "not fuond any MAIL"
-            f.seek(start[(score[x-1][1])-1][0])
-            line=f.readline()
-            s=line.find("<BODY>")
-            end=line.find("</BODY>")
-            if(s>-1 and end>-1):
-                _string+=str(line[s+6:end])
-            else:
-                _string+=str(line[s+6:])
+            if(x>len(score)):
+                print "not fuond any MAIL"
+                print "please enter valid number"
+            if(x<=len(score)):
+                f.seek(start[(score[x-1][1])-1][0])
                 line=f.readline()
+                s=line.find("<BODY>")
                 end=line.find("</BODY>")
-                while(end==-1):
-                    _string+=str(line)
+                if(s>-1 and end>-1):
+                    _string+=str(line[s+6:end])
+                else:
+                    _string+=str(line[s+6:])
                     line=f.readline()
                     end=line.find("</BODY>")
-                _string+=str(line[:end])
-            codebox(msg='GOOD LOCK', title='MAIL', text=_string)
-            _string=str()
+                    while(end==-1):
+                        _string+=str(line)
+                        line=f.readline()
+                        end=line.find("</BODY>")
+                    _string+=str(line[:end])
+                codebox(msg='GOOD LOCK', title='MAIL', text=_string)
+                _string=str()
             print"--------------------------------------------------------------------------------------"
             x=int(input("Which MAIL do you like show??"+'\n'+"if yo don't like please enter -1"+'\n'))
             
@@ -586,8 +589,8 @@ def input_query():
     _result=[]
     x=int(raw_input("pleas enter how many MAIL id you want to search?"+'\n'))
     qq=create_black_list()
-    print"--------------------------------"
-    print len(qq)
+    #print"--------------------------------"
+    #print len(qq)
     _result=score_phrase(qq,x)               
     user(_result)
     
