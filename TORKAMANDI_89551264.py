@@ -30,11 +30,14 @@ import time
 import os.path
 import os
 import sys
+import string
 from heapq import*
 from collections import OrderedDict
 black_list=[]
+black_list_s=[]
 def create_black_list():
     fr=None
+    tmp=[]
     fr=open("balcklist_word.txt",'rb')
     s=[]
     for line in fr:
@@ -45,10 +48,11 @@ def create_black_list():
             if(line[i] in list_stop):
                 continue
             black_list.append(line[i])
+            tmp.append(line[i])
+        black_list_s.append(tmp)
+        tmp=[]
+    blac_list=s=list(OrderedDict.fromkeys(black_list))
             
-    s=list(OrderedDict.fromkeys(black_list))
-    #print s
-    return s
 def unpack_list_of_unmerge_file():
     pm=[]
     with open('size-unmerge-inverted-index.dat','rb') as g:
@@ -497,18 +501,19 @@ def increase_score(q,doc,start):
     a=read_doc(start)
     check=False
     score=0
-    for i in range(len(a)):
-        if(a[i]==q[0] and len(a)-i>=len(q)):
-            check=True
-            k=i+1
-            if (len(q)>1):
-                for j in range(1,len(q)):
-                    if(a[k]!=q[j]):
-                        check=False
-                        break
-                    k+=1
-        if(check==True):
-            score+=1
+    for j in range(len(q)):
+        for i in range(len(a)):
+            if(a[i]==q[j][0] and len(a)-i>=len(q[j])):
+                check=True
+                k=i+1
+                if (len(q[j])>1):
+                    for z in range(1,len(q[j])):
+                        if(a[k]!=q[z]):
+                            check=False
+                            break
+                        k+=1
+            if(check==True):
+                score+=1
             check=False
     #print "increase_score done"
     return score
@@ -521,7 +526,7 @@ def score_phrase(q,x):
     result=exe[0]
     doc_start=exe[1]
     for i in range(len(result)):
-        j=increase_score(q,result[i][1],doc_start[(result[i][1])-1][0])
+        j=increase_score(black_list_s,result[i][1],doc_start[(result[i][1])-1][0])
         a=result[i][1]
         b=result[i][0]
         result[i]=((j+b,a))
@@ -588,10 +593,12 @@ def user(m):
 def input_query():
     _result=[]
     x=int(raw_input("pleas enter how many MAIL id you want to search?"+'\n'))
-    qq=create_black_list()
+    create_black_list()
     #print"--------------------------------"
-    #print len(qq)
-    _result=score_phrase(qq,x)               
+    #print black_list
+    #print "----------------------------------------------------------------------------------"
+    #print black_list_s
+    _result=score_phrase(black_list,x)               
     user(_result)
     
 #main_dictionary()
