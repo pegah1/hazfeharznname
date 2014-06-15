@@ -39,7 +39,7 @@ def create_black_list():
     fr=None
     tmp=[]
     fr=open("balcklist_word.txt",'rb')
-    s=[]
+    #s=[]
     for line in fr:
         line= re.findall(r"[\w']+",line)
         for i in range(0,len(line)):
@@ -51,7 +51,7 @@ def create_black_list():
             tmp.append(line[i])
         black_list_s.append(tmp)
         tmp=[]
-    blac_list=s=list(OrderedDict.fromkeys(black_list))
+    blac_list=list(OrderedDict.fromkeys(black_list))
             
 def unpack_list_of_unmerge_file():
     pm=[]
