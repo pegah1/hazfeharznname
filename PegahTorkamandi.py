@@ -5,7 +5,7 @@
 ############# how excute the program?:D ##############
 
 # 1- first copy all of your emails with the open tag <BODY> and the end tag </BODY> in the DOCUMENT.txt file.   
-# 2- in order to quickly execute the program for the huge amount of emails you can run the  two first functions, which I comment them.  
+# 2- in order to quickly execute the program, for the huge amount of emails, you can run the  two first functions, which I comment them.  
 # 3- after doing the 1 and 2 steps you can comment the two first functions and run the program.
 
 
