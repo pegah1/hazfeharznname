@@ -2,19 +2,17 @@
 ## PEGAH TORKAMANDI #####
 #########################
 
-############# nahve run kardane proje ##############
+############# how excute the program?:D ##############
 
-# 1- ebteda tamamie mail haye ke mikhahid check shavad ba tag baz <BODY> v tag baste </BODY> dar file DOCUMENT.txt be surate seri copy karde
-# 2- ba tavojo be inke tedad mail hayee ke mikhahd baresi shavad az tedad mail haye ke copy nemudeid bishtar nabashad!!!! 
-# 3- be manzure amalkarde sari cod dar surati ke hajme file shamele mailha ziad bashad dar ebteda 2 tabe aval ke comment nemudeam ra run konid
-# 4- bad az anjame marhale ghabl hal mitavan an 2 tabe ra comment karde v barname ra emtehan konid
+# 1- first copy all of your emails with the open tag <BODY> and the end tag </BODY> in the DOCUMENT.txt file.   
+# 2- in order to quickly execute the program for the huge amount of emails you can run the  two first functions, which I comment them.  
+# 3- after doing the 1 and 2 steps you can comment the two first functions and run the program.
 
 
 StopWord="a,able,about,across,after,all,almost,also,am,among,an,and,any,are,as,at,be,because,been,but,by,can,cannot,could,dear,did,do,does,either,else,ever,every,for,from,get,got,had,has,have,he,her,hers,him,his,how,however,i,if,in,into,is,it,its,just,least,let,like,likely,may,me,might,most,must,my,neither,no,nor,not,of,off,often,on,only,or,other,our,own,rather,said,say,says,she,should,since,so,some,than,that,the,their,them,then,there,these,they,this,tis,to,too,twas,us,wants,was,we,were,what,when,where,which,while,who,whom,why,will,with,would,yet,you,your"
-# number_of_document-->[tedade tamame sanadha,(position start sanad,toole sanad)]
-# size-unmerge-inverted-index-->tedad tamae file haye taghsimshode az invertedindex
-# unmerge-inverted-index-->term shoro har unmerge file ra darad(size(term),term)
-#farz bar in ast ke tamame mail ha dar yek file txt be name DOCUMENT gharar dadeshode ast ke har mail ba tag <BODY> baz shode v ba tag </BODY> baste shode ast.
+# number_of_document-->[the amount of all the documents ,(position start sanad,length of the document)]
+# size-unmerge-inverted-index-->the amount of all the inverted index files
+# unmerge-inverted-index-->it has the start term of each unmerge file(size(term),term)
 list_stop=StopWord.split(",")
 import easygui as eg
 from easygui import *
