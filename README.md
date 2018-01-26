@@ -5,4 +5,4 @@ I want to detec the spam emails by the collection of the sample spam messages an
 
 ------------------------------------------------------------------------------------------------------------------------------------
 in order to use my cod you can run the PegahTorkamandi.py
-the DOCUMENT.txt is collection of the spam messages' attributes.
+, also the DOCUMENT.txt is collection of the spam messages' attributes.
